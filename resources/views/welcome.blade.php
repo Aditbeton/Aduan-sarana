@@ -1,7 +1,6 @@
 @extends('layouts.main')
 
 @section('body')
-    {{-- Memanggil Navbar --}}
     @include('layouts.navbar.siswa')
 
     <div class="container py-5">

@@ -16,6 +16,17 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('/home', function () {
+    if (auth('admin')->check()) {
+        return redirect()->route('admin.dashboard');
+    }
+
+    if (auth('siswa')->check()) {
+        return redirect()->route('siswa.dashboard');
+    }
+
+    return redirect()->route('welcome');
+})->name('home');
 Route::prefix('siswa')->name('siswa.')->group(function () {
 
     Route::middleware('guest:siswa')->group(function () {
@@ -41,8 +52,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::middleware('auth:admin')->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])
-            ->name('dashboard');
-        
+        ->name('dashboard');
+
         Route::post('logout', [AdminAuthController::class, 'logout'])->name('logout');
         Route::get('/akun', [AdminAkunController::class, 'index'])->name('akun');
         Route::post('/akun', [AdminAkunController::class, 'updateProfile']);

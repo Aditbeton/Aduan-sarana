@@ -9,8 +9,7 @@ use App\Models\Siswa;
 
 class DashboardController extends Controller
 {
-    public function index()
-    {
+    public function index() {
         $totalSiswa = Siswa::count();
         $totalLaporan = LaporanPengaduan::count();
 
@@ -22,16 +21,21 @@ class DashboardController extends Controller
             $q->where('status', 'selesai');
         })->count();
 
+        $laporanMenunggu = LaporanPengaduan::whereHas('aspirasi', function ($q) {
+            $q->where('status', 'menunggu');
+        })->count();
+
         $laporanTerbaru = LaporanPengaduan::with(['siswa', 'kategori', 'aspirasi'])
-            ->latest()
-            ->take(5)
-            ->get();
+        ->latest()
+        ->take(5)
+        ->get();
 
         return view('admin.dashboard', compact(
             'totalSiswa',
             'totalLaporan',
             'laporanProses',
             'laporanSelesai',
+            'laporanMenunggu',
             'laporanTerbaru'
         ));
     }
