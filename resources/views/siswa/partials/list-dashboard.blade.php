@@ -4,10 +4,11 @@
             <th>#</th>
             <th>Keterangan Laporan</th>
             <th>Status</th>
+            <th></th>
         </tr>
     </thead>
-<tbody>
-    @forelse ($laporan as $item)
+    <tbody>
+        @forelse ($laporan as $item)
         <tr>
             <td>{{ ($loop->iteration + ($laporan->firstItem() - 1)) }}</td>
             <td>
@@ -25,26 +26,26 @@
             </td>
             <td>
                 @if ($item->status == 'proses')
-                    <span class="badge bg-warning text-dark">Diproses</span>
+                <span class="badge bg-warning text-dark">            <i class="bi bi-hourglass-split"></i>Diproses</span>
                 @elseif ($item->status == 'selesai')
-                    <span class="badge bg-success">Selesai</span>
+                <span class="badge bg-success">            <i class="bi bi-check-circle"></i> Selesai</span>
                 @else
-                    <span class="badge bg-light text-dark">Menunggu</span>
+                <span class="badge bg-danger">            <i class="bi bi-clock-fill"></i> Menunggu</span>
                 @endif
             </td>
             <td>
                 <a href="{{ route('siswa.laporan.show', $item->id) }}"
-                    class="btn btn-sm btn-primary">
+                    class="btn btn-primary">
                     <i class="bi bi-eye"></i>
                 </a>
             </td>
         </tr>
-    @empty
+        @empty
         <tr>
             <td colspan="6" class="text-center text-muted py-4">
                 Belum ada laporan
             </td>
         </tr>
-    @endforelse
-</tbody>
+        @endforelse
+    </tbody>
 </table>

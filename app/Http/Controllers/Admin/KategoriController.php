@@ -59,6 +59,10 @@ class KategoriController extends Controller
 
     public function destroy(Kategori $kategori)
     {
+        if ($kategori->laporan()->exists()) {
+            return back()->with('error', 'Kategori tidak bisa dihapus karena masih digunakan');
+        }
+
         $kategori->delete();
 
         return back()->with('success', 'Kategori berhasil dihapus');

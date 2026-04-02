@@ -18,4 +18,6 @@ class Kategori extends Model
     {
         return $this->hasMany(LaporanPengaduan::class);
     }
+
+    
 }

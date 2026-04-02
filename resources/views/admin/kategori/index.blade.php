@@ -11,10 +11,12 @@
                 + Tambah Kategori
             </a>
 
-            @if (session('success'))
-                <div class="alert alert-success mt-3">
-                    {{ session('success') }}
-                </div>
+            @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+
+            @if(session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
         </div>
 
@@ -33,16 +35,12 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->nama_kategori }}</td>
                             <td>
-                                <a href="{{ route('admin.kategori.edit', $item->id) }}"
-                                    class="btn btn-sm btn-warning">Edit</a>
+                                <a href="{{ route('admin.kategori.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
 
-                                <form action="{{ route('admin.kategori.destroy', $item->id) }}" 
-                                    method="POST"
-                                    class="d-inline">
+                                <form action="{{ route('admin.kategori.destroy', $item->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Hapus kategori ini?')">
+                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Hapus kategori ini?')">
                                         Hapus
                                     </button>
                                 </form>
@@ -56,7 +54,7 @@
                 </tbody>
             </table>
         </div>
-        
+
         <div class="card-footer pb-0">
             {{ $kategori->links() }}
         </div>
