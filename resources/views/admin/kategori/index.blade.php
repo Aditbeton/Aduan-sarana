@@ -8,7 +8,7 @@
     <div class="card mb-3">
         <div class="card-body">
             <a href="{{ route('admin.kategori.create') }}" class="btn btn-primary mb-3">
-                + Tambah Kategori
+                <i class="bi bi-plus-circle"></i> Tambah Kategori
             </a>
 
             @if(session('success'))
@@ -24,9 +24,9 @@
             <table class="table table-striped mb-0">
                 <thead>
                     <tr>
-                        <th width="50">No</th>
+                        <th>No</th>
                         <th>Nama Kategori</th>
-                        <th width="150">Aksi</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>

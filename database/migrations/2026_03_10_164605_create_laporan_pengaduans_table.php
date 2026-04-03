@@ -11,18 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('laporan_pengaduans', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('siswa_id')
-                ->constrained('siswas')
-                ->cascadeOnDelete();
-            $table->foreignId('kategori_id')
-                ->constrained('kategoris')
-                ->cascaOnDelete();
-            $table->text('ket');
-            $table->string('lokasi');
-            $table->timestamps();
-        });
+      Schema::create('laporan_pengaduans', function (Blueprint $table) {
+    $table->id();
+
+    $table->foreignId('siswa_id')
+          ->constrained('siswas')
+          ->cascadeOnDelete();
+
+    $table->foreignId('kategori_id')
+          ->constrained('kategoris')
+          ->cascadeOnDelete();
+
+    $table->text('ket');
+    $table->string('lokasi');
+    $table->timestamps();
+});
+        
     }
 
     /**
