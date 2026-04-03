@@ -1,23 +1,48 @@
 <style>
-.nav-tabs-custom .nav-link {
+.navbar.nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem; /* default = HP */
+    padding: 0 15px;
+}
+
+/* PC / Desktop */
+@media (min-width: 992px) {
+    .navbar.nav {
+        gap: 4rem;
+    }
+}
+
+/* ITEM */
+.navbar .nav-item {
+    list-style: none;
+}
+
+/* LINK */
+.navbar .nav-link {
     position: relative;
-    width: 55px;
-    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
 }
 
-.nav-tabs-custom .nav-link i {
-    font-size: 18px;
+/* ICON */
+.navbar .nav-link i {
+    font-size: 26px; /* sedikit lebih besar biar balance */
     color: #000;
     transition: 0.2s;
 }
 
-.nav-tabs-custom .nav-link span {
+/* ACTIVE */
+.navbar .nav-link.active i {
+    color: #0d6efd;
+}
+
+/* HOVER TEXT */
+.navbar .nav-link span {
     position: absolute;
-    bottom: -28px;
+    bottom: -30px;
     font-size: 12px;
     background: #000;
     color: #fff;
@@ -30,51 +55,22 @@
     pointer-events: none;
 }
 
-.nav-tabs-custom .nav-link:hover span {
+/* HOVER */
+.navbar .nav-link:hover span {
     opacity: 1;
     transform: translateY(0);
 }
 
-.nav-tabs-custom .nav-link:hover {
-    color: #000;
-    background: #fff;
-    border-color: #dee2e6 #dee2e6 #fff;
-}
-
-.nav-tabs-custom:hover .nav-link.active {
-    background: transparent;
-    border-color: transparent;
-    color: #555;
-}
-
-.nav-tabs-custom .nav-link.active:hover {
-    background: #fff;
-    border-color: #dee2e6 #dee2e6 #fff;
-    color: #000;
-}
-
-.nav-tabs-custom .nav-link.active i {
-    color: #0d6efd;
-}
-
-.nav-tabs-custom .nav-link:hover i {
-    color: #0d6efd;
-}
-
-.nav-tabs-custom:hover .nav-link.active i {
-    color: #000;
-}
-
-.nav-tabs-custom .nav-link.active:hover i {
+.navbar .nav-link:hover i {
     color: #0d6efd;
 }
 </style>
 
 @auth('admin')
 
-<ul class="nav nav-tabs nav-tabs-custom justify-content-center">
+<ul class="navbar nav">
 
-    <li class="nav-item mx-3">
+    <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" 
            href="{{ route('admin.dashboard') }}">
             <i class="bi bi-house-door"></i>
@@ -82,7 +78,7 @@
         </a>
     </li>
 
-    <li class="nav-item mx-3">
+    <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('admin.laporan.*') ? 'active' : '' }}" 
            href="{{ route('admin.laporan.index') }}">
             <i class="bi bi-file-earmark-text"></i>
@@ -90,7 +86,7 @@
         </a>
     </li>
 
-    <li class="nav-item mx-3">
+    <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('admin.kategori.*') ? 'active' : '' }}" 
            href="{{ route('admin.kategori.index') }}">
             <i class="bi bi-tags"></i>
@@ -98,7 +94,7 @@
         </a>
     </li>
     
-    <li class="nav-item mx-3">
+    <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('admin.daftar-siswa.*') ? 'active' : '' }}" 
            href="{{ route('admin.daftar-siswa.index') }}">
             <i class="bi bi-people"></i>
@@ -106,7 +102,7 @@
         </a>
     </li>
     
-    <li class="nav-item mx-3">
+    <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('admin.akun') ? 'active' : '' }}" 
            href="{{ route('admin.akun') }}">
             <i class="bi bi-person-circle"></i>

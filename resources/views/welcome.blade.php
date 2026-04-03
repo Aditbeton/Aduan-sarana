@@ -5,7 +5,7 @@
 
     <div class="container py-5">
         <div class="p-5 mb-4 bg-white rounded-4 shadow-sm text-center border">
-            <h1 class="display-5 fw-bold text-primary">APSS</h1>
+            <h1 class="display-5 fw-bold text-primary"> {{ config('app.name') }} </h1>
             <p class="fs-5 text-muted">
                 <strong>Aplikasi Pengaduan Sarana Sekolah</strong>
                 adalah platform digital yang digunakan oleh siswa untuk 
