@@ -45,6 +45,12 @@
                     </button>
                 </form>
             </div>
+           <form action="{{ route('admin.logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class=" mt-3 text-danger w-100 btn btn-outline-danger">
+                        <i class="bi bi-box-arrow-right me-2"></i> Logout
+                    </button>
+                </form>
         </div>
     </div>
 @endsection
