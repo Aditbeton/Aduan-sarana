@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1.5rem; /* default = HP */
+    gap: 1.7rem; /* default = HP */
     padding: 0 15px;
 }
 
@@ -77,6 +77,14 @@
             <span>Dashboard</span>
         </a>
     </li>
+    
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('admin.daftar-siswa.*') ? 'active' : '' }}" 
+           href="{{ route('admin.daftar-siswa.index') }}">
+            <i class="bi bi-people"></i>
+            <span>Daftar Siswa</span>
+        </a>
+    </li>
 
     <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('admin.laporan.*') ? 'active' : '' }}" 
@@ -91,14 +99,6 @@
            href="{{ route('admin.kategori.index') }}">
             <i class="bi bi-tags"></i>
             <span>Kategori</span>
-        </a>
-    </li>
-    
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.daftar-siswa.*') ? 'active' : '' }}" 
-           href="{{ route('admin.daftar-siswa.index') }}">
-            <i class="bi bi-people"></i>
-            <span>Daftar Siswa</span>
         </a>
     </li>
     

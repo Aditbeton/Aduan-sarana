@@ -24,7 +24,7 @@
                     <x-input name="username" placeholder="Username" :value="$admin->username" />
 
                     <button class="btn btn-primary">
-                        <i class="bi bi-database"></i> Update
+                        <i class="bi bi-floppy"></i> Simpan Perubahan
                     </button>
                 </form>
             </div>

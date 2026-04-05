@@ -8,14 +8,14 @@
     text-decoration: none;
 }
 </style>
-<nav class="navbar navbar-expand-lg" data-bs-theme="light">
+<nav class="navbar navbar-expand-lg mb-0" data-bs-theme="light">
     <div class="container">
         <a class="navbar-brand" href="{{ route('home') }}">
             {{ config('app.name') }}
         </a>
     </div> 
 </nav>
-<nav class="navbar navbar-expand-lg" data-bs-theme="light">
+<nav class="navbar navbar-expand-lg mt-0" data-bs-theme="light">
     <div class="container">
          <ul class="navbar-nav mx-auto">
              @include('layouts.nav-items.admin-auth')

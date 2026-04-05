@@ -24,24 +24,24 @@
             <table class="table table-striped mb-0">
                 <thead>
                     <tr>
-                        <th>No</th>
+                        <th>No.</th>
                         <th>Nama Kategori</th>
-                        <th>Aksi</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($kategori as $item)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $loop->iteration }}.</td>
                             <td>{{ $item->nama_kategori }}</td>
-                            <td>
-                                <a href="{{ route('admin.kategori.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <td class="text-end">
+                                <a href="{{ route('admin.kategori.edit', $item->id) }}" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
 
                                 <form action="{{ route('admin.kategori.destroy', $item->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-sm btn-danger" onclick="return confirm('Hapus kategori ini?')">
-                                        Hapus
+                                        <i class="bi bi-trash"></i>
                                     </button>
                                 </form>
                             </td>

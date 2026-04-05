@@ -30,7 +30,7 @@
             <table class="table table-striped mb-0">
                 <thead>
                     <tr>
-                        <th>No</th>
+                        <th>No.</th>
                         <th>Nis</th>
                         <th>Nama</th>
                         <th>Kelas</th>
@@ -39,7 +39,7 @@
                 <tbody>
                     @forelse ($siswa as $item)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $loop->iteration }}.</td>
                             <td>{{ $item->nis }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->kelas }}</td>

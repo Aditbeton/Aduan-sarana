@@ -1,13 +1,13 @@
 <table class="table table-striped mb-0">
     <thead>
         <tr>
-            <th>No</th>
+            <th>No.</th>
             <th>Siswa</th>
             <th>Kategori</th>
             <th>Laporan</th>
             <th>Status</th>
             <th>Feedback</th>
-            <th>Aksi</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -19,11 +19,11 @@
             <td>{{ Str::limit($item->ket, 50) }}</td>
             <td>
                 @if ($item->status === 'selesai')
-                <span class="badge bg-success">            <i class="bi bi-check-circle"></i> Selesai</span>
+                <span class="badge bg-success">            <i class="bi bi-patch-check-fill"></i> Selesai</span>
                 @elseif ($item->status === 'proses')
-                <span class="badge bg-warning">            <i class="bi bi-hourglass-split"></i> Proses</span>
+                <span class="badge bg-warning">            <i class="bi bi-arrow-repeat"></i> Proses</span>
                 @else
-                <span class="badge bg-danger">            <i class="bi bi-clock"></i> Belum Diproses</span>
+                <span class="badge bg-danger">            <i class="bi bi-hourglass-split"></i> Belum Diproses</span>
                 @endif
             </td>
             <td>{{ $item->feedback }}</td>

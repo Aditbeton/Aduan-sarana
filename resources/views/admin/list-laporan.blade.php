@@ -20,21 +20,14 @@
                         <td>{{ $item->siswa->nama ?? '-' }}</td>
                         <td>{{ $item->kategori->nama_kategori ?? '-' }}</td>
                         <td>
-                          @php
-    $status = $item->aspirasi?->status ?? 'baru';
-
-    $badge = match($status) {
-        'baru' => 'primary',    // biru
-        'proses' => 'warning', // kuning
-        'menunggu' => 'danger',// merah
-        'selesai' => 'success',// hijau
-        default => 'secondary'
-    };
-@endphp
-
-<span class="badge bg-{{ $badge }}">
-    {{ ucfirst($status) }}
-</span>
+                            @php
+                                $badge = $item->aspirasi?->status === 'selesai'
+                                    ? 'success'
+                                    : 'danger';
+                            @endphp
+                            <span class="badge bg-{{ $badge }}">
+                                {{ ucfirst($item->aspirasi?->status ?? 'baru') }}
+                            </span>
                         </td>
                         <td>{{ $item->created_at->format('d M Y') }}</td>
                     </tr>
