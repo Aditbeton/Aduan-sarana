@@ -61,5 +61,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('kategori', KategoriController::class);
         Route::resource('laporan', LaporanAspirasiController::class)->only('index', 'show', 'update');
         Route::resource('/daftar-siswa', DaftarSiswaController::class);
+        Route::get('/admin/daftar-siswa/{id}/history', [DaftarSiswaController::class, 'showHistory'])
+    ->name('daftar-siswa.show-history');
     });
 });

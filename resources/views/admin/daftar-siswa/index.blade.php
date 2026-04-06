@@ -34,6 +34,7 @@
                         <th>Nis</th>
                         <th>Nama</th>
                         <th>Kelas</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,6 +44,12 @@
                             <td>{{ $item->nis }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->kelas }}</td>
+                            <td>
+                              <a href="{{ route('admin.daftar-siswa.show-history', $item->id) }}"
+                    class="btn btn-primary">
+                    <i class="bi bi-eye"></i>
+                </a>
+                            </td>
                         </tr>
                     @empty
                         <tr>

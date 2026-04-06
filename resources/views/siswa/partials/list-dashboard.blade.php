@@ -19,18 +19,18 @@
                     </small>
                 </p>
                 <p class="text-muted">
-                    Kategori : {{ $item->kategori->nama_kategori ?? '-' }},
+                    Kategori : {{ $item->kategori->nama_kategori }},
                     Lokasi : {{ $item->lokasi }},
                     Feedback : {{ $item->feedback }}
                 </p>
             </td>
             <td>
                 @if ($item->status == 'proses')
-                <span class="badge bg-warning text-dark">            <i class="bi bi-hourglass-split"></i>Diproses</span>
+                <span class="badge bg-warning text-dark">            <i class="bi bi-arrow-repeat"></i>Diproses</span>
                 @elseif ($item->status == 'selesai')
-                <span class="badge bg-success">            <i class="bi bi-check-circle"></i> Selesai</span>
+                <span class="badge bg-success">            <i class="bi bi-patch-check-fill"></i> Selesai</span>
                 @else
-                <span class="badge bg-danger">            <i class="bi bi-clock-fill"></i> Menunggu</span>
+                <span class="badge bg-danger">            <i class="bi bi-hourglass-split"></i> Menunggu</span>
                 @endif
             </td>
             <td>
