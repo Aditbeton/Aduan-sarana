@@ -20,14 +20,31 @@
                         <td>{{ $item->siswa->nama ?? '-' }}</td>
                         <td>{{ $item->kategori->nama_kategori ?? '-' }}</td>
                         <td>
-                            @php
-                                $badge = $item->aspirasi?->status === 'selesai'
-                                    ? 'success'
-                                    : 'danger';
-                            @endphp
-                            <span class="badge bg-{{ $badge }}">
-                                {{ ucfirst($item->aspirasi?->status ?? 'baru') }}
-                            </span>
+                           @php
+    $status = 'baru';
+
+    if ($item->created_at->diffInMinutes(now()) >= 5) {
+        $status = $item->aspirasi?->status ?? 'menunggu';
+    }
+
+    $badge = match ($status) {
+        'selesai' => 'success',
+        'proses' => 'warning',
+        'menunggu' => 'danger',
+        default => 'primary',
+    };
+    
+    $icon = match ($status) {
+        'selesai' => 'bi-patch-check-fill',
+        'proses' => 'bi-arrow-repeat',
+        'menunggu' => 'bi-hourglass-split',
+        default => 'primary', 
+    };
+@endphp
+
+<span class="badge bg-{{ $badge }}">
+   <i class="bi {{ $icon }}"></i> {{ ucfirst($status) }}
+</span>
                         </td>
                         <td>{{ $item->created_at->format('d M Y') }}</td>
                     </tr>

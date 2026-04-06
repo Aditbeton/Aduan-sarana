@@ -8,7 +8,7 @@
                 <div class="text-muted small">
                     Total Siswa
                 </div>
-                <h3><i class="bi bi-person-fill text-primary"></i>
+                <h3><i class="bi bi-people-fill text-primary"></i>
                     {{ $totalSiswa ?? 0 }}</h3>
             </div>
         </div>
@@ -32,7 +32,7 @@
                 <div class="text-muted small">
                     Laporan Belum Diproses
                 </div>
-                <h3><i class="bi-clock-fill text-danger"></i>
+                <h3><i class="bi-hourglass-split text-danger"></i>
                     {{ $laporanMenunggu ?? 0 }}</h3>
             </div>
         </div>
@@ -44,7 +44,7 @@
                 <div class="text-muted small">
                     Laporan Diproses
                 </div>
-                <h3><i class="bi-hourglass-split text-warning"></i>
+                <h3><i class="bi-arrow-repeat text-warning"></i>
                     {{ $laporanProses ?? 0 }}</h3>
             </div>
         </div>
@@ -56,7 +56,7 @@
                 <div class="text-muted small">
                     Laporan Selesai
                 </div>
-                <h3><i class="bi-check-circle-fill text-success"></i>
+                <h3><i class="bi-patch-check-fill text-success"></i>
                     {{ $laporanSelesai ?? 0 }}</h3>
             </div>
         </div>
