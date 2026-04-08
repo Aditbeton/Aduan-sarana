@@ -21,9 +21,7 @@ class DashboardController extends Controller
             $q->where('status', 'selesai');
         })->count();
 
-        $laporanMenunggu = LaporanPengaduan::whereHas('aspirasi', function ($q) {
-            $q->where('status', 'menunggu');
-        })->count();
+        $laporanMenunggu = $totalLaporan - $laporanProses - $laporanSelesai;
 
         $laporanTerbaru = LaporanPengaduan::with(['siswa', 'kategori', 'aspirasi'])
         ->latest()
