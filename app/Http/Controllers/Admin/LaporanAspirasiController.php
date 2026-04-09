@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Aspirasi;
 use App\Models\LaporanPengaduan;
 
@@ -81,7 +82,18 @@ class LaporanAspirasiController extends Controller
     {
         $request->validate([
             'status' => 'required|in:proses,selesai',
+            'bukti_penanganan' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
         ]);
+
+        // Handle file upload bukti penanganan
+        $buktiPenangananPath = $laporan->bukti_penanganan;
+        if ($request->hasFile('bukti_penanganan')) {
+            // Hapus file lama jika ada
+            if ($buktiPenangananPath && Storage::disk('public')->exists($buktiPenangananPath)) {
+                Storage::disk('public')->delete($buktiPenangananPath);
+            }
+            $buktiPenangananPath = $request->file('bukti_penanganan')->store('bukti-penanganan', 'public');
+        }
 
         // Membuat atau memperbarui data di tabel aspirasi
         Aspirasi::updateOrCreate(
@@ -90,12 +102,17 @@ class LaporanAspirasiController extends Controller
             ],
             [
                 'admin_id' => Auth::guard('admin')->id(),
-                'status'   => $request->status,
+                'status' => $request->status,
             ]
         );
 
+        // Update bukti_penanganan di tabel laporan_pengaduans
+        $laporan->update([
+            'bukti_penanganan' => $buktiPenangananPath,
+        ]);
+
         return redirect()
             ->route('admin.laporan.show', $laporan->id)
-            ->with('success', 'Status aspirasi berhasil diperbarui.');
+            ->with('success', 'Status aspirasi dan bukti penanganan berhasil diperbarui.');
     }
 }

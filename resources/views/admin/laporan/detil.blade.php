@@ -48,3 +48,37 @@
         </table>
     </div>
 </div>
+
+{{-- Bukti Laporan --}}
+<div class="card mb-3">
+    <div class="card-header">
+        <h6 class="mb-0">Bukti Laporan</h6>
+    </div>
+    <div class="card-body">
+        @if ($laporan->bukti)
+            <a href="{{ asset('storage/' . $laporan->bukti) }}" target="_blank" class="text-decoration-none">
+                <img src="{{ asset('storage/' . $laporan->bukti) }}" alt="Bukti Laporan" class="img-fluid"
+                    style="max-width: 100%; max-height: 400px;">
+            </a>
+        @else
+            <span class="text-muted">Tidak ada bukti laporan</span>
+        @endif
+    </div>
+</div>
+
+{{-- Bukti Penanganan --}}
+<div class="card mb-3">
+    <div class="card-header">
+        <h6 class="mb-0">Bukti Penanganan</h6>
+    </div>
+    <div class="card-body">
+        @if ($laporan->bukti_penanganan)
+            <a href="{{ asset('storage/' . $laporan->bukti_penanganan) }}" target="_blank" class="text-decoration-none">
+                <img src="{{ asset('storage/' . $laporan->bukti_penanganan) }}" alt="Bukti Penanganan" class="img-fluid"
+                    style="max-width: 100%; max-height: 400px;">
+            </a>
+        @else
+            <span class="text-muted">Belum ada bukti penanganan</span>
+        @endif
+    </div>
+</div>

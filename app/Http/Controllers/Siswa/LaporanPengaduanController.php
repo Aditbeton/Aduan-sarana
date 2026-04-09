@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Aspirasi;
 use App\Models\Kategori;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class LaporanPengaduanController extends Controller
 {
@@ -36,15 +37,22 @@ class LaporanPengaduanController extends Controller
     {
         $request->validate([
             'kategori_id' => 'required|exists:kategoris,id',
-            'ket'         => 'required|string',
-            'lokasi'      => 'required|string|max:255',
+            'ket' => 'required|string',
+            'lokasi' => 'required|string|max:255',
+            'bukti' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
         ]);
 
+        $buktiPath = null;
+        if ($request->hasFile('bukti')) {
+            $buktiPath = $request->file('bukti')->store('bukti-laporan', 'public');
+        }
+
         LaporanPengaduan::create([
-            'siswa_id'    => Auth::guard('siswa')->user()->id,
+            'siswa_id' => Auth::guard('siswa')->user()->id,
             'kategori_id' => $request->kategori_id,
-            'ket'         => $request->ket,
-            'lokasi'      => $request->lokasi,
+            'ket' => $request->ket,
+            'lokasi' => $request->lokasi,
+            'bukti' => $buktiPath,
         ]);
 
         return redirect()
@@ -85,6 +93,16 @@ class LaporanPengaduanController extends Controller
      */
     public function destroy(LaporanPengaduan $laporan)
     {
+        // Hapus file bukti jika ada
+        if ($laporan->bukti && Storage::disk('public')->exists($laporan->bukti)) {
+            Storage::disk('public')->delete($laporan->bukti);
+        }
+
+        // Hapus file bukti penanganan jika ada
+        if ($laporan->bukti_penanganan && Storage::disk('public')->exists($laporan->bukti_penanganan)) {
+            Storage::disk('public')->delete($laporan->bukti_penanganan);
+        }
+
         $laporan->delete();
 
         return redirect()

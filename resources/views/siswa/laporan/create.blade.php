@@ -16,16 +16,26 @@
                         @csrf
 
                         {{-- Kategori --}}
-                        <x-select label="Kategori" name="kategori_id" 
-                            :options="$kategori" label-field="nama_kategori" />
+                        <x-select label="Kategori" name="kategori_id" :options="$kategori" label-field="nama_kategori" />
 
                         {{-- Lokasi --}}
-                        <x-input label="Lokasi Kejadian" name="lokasi"
-                            placeholder="Contoh: Ruang Kelas X RPL A" />
+                        <x-input label="Lokasi Kejadian" name="lokasi" placeholder="Contoh: Ruang Kelas X RPL A" />
 
                         {{-- Keterangan --}}
-                        <x-textarea label="Keterangan" name="ket"
-                            placeholder="Masukkan keterangan..." rows="5" />
+                        <x-textarea label="Keterangan" name="ket" placeholder="Masukkan keterangan..." rows="5" />
+
+                        {{-- Bukti Laporan --}}
+                        <div class="mb-3">
+                            <label for="bukti" class="form-label">Bukti Laporan</label>
+                            <input type="file" name="bukti" id="bukti"
+                                class="form-control @error('bukti') is-invalid @enderror" accept="image/*">
+                            @error('bukti')
+                                <div class="invalid-feedback d-block">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <small class="text-muted">Format: JPG, PNG, GIF. Maksimal 5MB</small>
+                        </div>
 
                         <div class="d-grid">
                             <button class="btn btn-primary">
