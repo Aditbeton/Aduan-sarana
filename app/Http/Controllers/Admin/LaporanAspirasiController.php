@@ -88,11 +88,24 @@ class LaporanAspirasiController extends Controller
         // Handle file upload bukti penanganan
         $buktiPenangananPath = $laporan->bukti_penanganan;
         if ($request->hasFile('bukti_penanganan')) {
+            $file = $request->file('bukti_penanganan');
+            $path = 'bukti-penanganan';
+
+            // Pastikan direktori ada
+            if (!Storage::disk('public')->exists($path)) {
+                Storage::disk('public')->makeDirectory($path);
+            }
+
             // Hapus file lama jika ada
             if ($buktiPenangananPath && Storage::disk('public')->exists($buktiPenangananPath)) {
                 Storage::disk('public')->delete($buktiPenangananPath);
             }
-            $buktiPenangananPath = $request->file('bukti_penanganan')->store('bukti-penanganan', 'public');
+
+            $fileName = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $buktiPenangananPath = $path . '/' . $fileName;
+
+            // Copy file ke storage
+            Storage::disk('public')->put($buktiPenangananPath, file_get_contents($file));
         }
 
         // Membuat atau memperbarui data di tabel aspirasi

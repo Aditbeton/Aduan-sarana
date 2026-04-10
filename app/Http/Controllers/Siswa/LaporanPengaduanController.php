@@ -44,7 +44,19 @@ class LaporanPengaduanController extends Controller
 
         $buktiPath = null;
         if ($request->hasFile('bukti')) {
-            $buktiPath = $request->file('bukti')->store('bukti-laporan', 'public');
+            $file = $request->file('bukti');
+            $path = 'bukti-laporan';
+
+            // Pastikan direktori ada
+            if (!Storage::disk('public')->exists($path)) {
+                Storage::disk('public')->makeDirectory($path);
+            }
+
+            $fileName = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $buktiPath = $path . '/' . $fileName;
+
+            // Copy file ke storage
+            Storage::disk('public')->put($buktiPath, file_get_contents($file));
         }
 
         LaporanPengaduan::create([
